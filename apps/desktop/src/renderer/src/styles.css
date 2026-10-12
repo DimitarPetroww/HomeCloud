@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "@homecloud/config/tailwind/theme.css";
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

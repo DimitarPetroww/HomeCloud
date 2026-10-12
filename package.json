@@ -1,0 +1,31 @@
+{
+  "name": "homecloud",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.2",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "check": "turbo run lint typecheck test && pnpm format:check",
+    "provision:dev": "pnpm --filter @homecloud/provisioning provision:dev",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:up": "docker compose -f infrastructure/docker/compose.yaml up -d --wait",
+    "db:down": "docker compose -f infrastructure/docker/compose.yaml down",
+    "appliance:up": "docker compose -f infrastructure/docker/compose.yaml --profile appliance up -d --build --wait",
+    "appliance:down": "docker compose -f infrastructure/docker/compose.yaml --profile appliance down"
+  },
+  "devDependencies": {
+    "@homecloud/config": "workspace:*",
+    "prettier": "^3.9.9",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "turbo": "^2.11.7",
+    "typescript": "~6.0.3"
+  }
+}

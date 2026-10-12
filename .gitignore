@@ -1,0 +1,17 @@
+node_modules/
+dist/
+build/
+out/
+coverage/
+.turbo/
+*.tsbuildinfo
+
+.env
+.env.*
+!.env.example
+
+.DS_Store
+*.log
+
+# Dev appliance identity (pnpm provision:dev). Contains a private key.
+.appliance/

@@ -1,0 +1,9 @@
+{
+  "extends": "@homecloud/config/tsconfig/node.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true
+  },
+  "include": ["electron.vite.config.ts", "src/main", "src/preload", "src/shared"]
+}

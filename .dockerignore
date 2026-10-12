@@ -1,0 +1,10 @@
+**/node_modules
+**/dist
+**/out
+**/.turbo
+**/.env
+**/.env.*
+!**/.env.example
+.git
+.DS_Store
+.appliance

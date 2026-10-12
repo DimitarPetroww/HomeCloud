@@ -1,0 +1,40 @@
+# Development:  `pnpm db:up`         → PostgreSQL only; the API runs natively with hot reload.
+# Appliance:    `pnpm appliance:up`  → API + PostgreSQL in containers, as on the Home Cloud box.
+name: homecloud
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: homecloud
+      POSTGRES_PASSWORD: homecloud
+      POSTGRES_DB: homecloud
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U homecloud -d homecloud"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  api:
+    profiles: ["appliance"]
+    build:
+      context: ../..
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://homecloud:homecloud@postgres:5432/homecloud
+      HOST: 0.0.0.0
+    # On the real appliance this becomes `network_mode: host` so mDNS reaches the home network.
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres-data:

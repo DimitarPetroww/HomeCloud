@@ -1,0 +1,3 @@
+pnpm-lock.yaml
+**/routeTree.gen.ts
+apps/api/drizzle/

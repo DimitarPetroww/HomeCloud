@@ -1,0 +1,7 @@
+{
+  "extends": "@homecloud/config/tsconfig/node.json",
+  "compilerOptions": {
+    "rewriteRelativeImportExtensions": true
+  },
+  "include": ["src", "drizzle.config.ts"]
+}
